@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		548973DA2D1AB1C100674B73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 545A4AF72D1A890700C65FC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 545A4AFE2D1A890800C65FC1;
+			remoteInfo = GitHubViewer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		545A4AFF2D1A890800C65FC1 /* GitHubViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		548973D62D1AB1C100674B73 /* GitHubViewerUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubViewerUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = GitHubViewer;
 			sourceTree = "<group>";
 		};
+		548973D72D1AB1C100674B73 /* GitHubViewerUnitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GitHubViewerUnitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		545A4AFC2D1A890800C65FC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		548973D32D1AB1C100674B73 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				545A4B012D1A890800C65FC1 /* GitHubViewer */,
+				548973D72D1AB1C100674B73 /* GitHubViewerUnitTests */,
 				545A4B002D1A890800C65FC1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				545A4AFF2D1A890800C65FC1 /* GitHubViewer.app */,
+				548973D62D1AB1C100674B73 /* GitHubViewerUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = 545A4AFF2D1A890800C65FC1 /* GitHubViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		548973D52D1AB1C100674B73 /* GitHubViewerUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 548973DE2D1AB1C100674B73 /* Build configuration list for PBXNativeTarget "GitHubViewerUnitTests" */;
+			buildPhases = (
+				548973D22D1AB1C100674B73 /* Sources */,
+				548973D32D1AB1C100674B73 /* Frameworks */,
+				548973D42D1AB1C100674B73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				548973DB2D1AB1C100674B73 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				548973D72D1AB1C100674B73 /* GitHubViewerUnitTests */,
+			);
+			name = GitHubViewerUnitTests;
+			packageProductDependencies = (
+			);
+			productName = GitHubViewerUnitTests;
+			productReference = 548973D62D1AB1C100674B73 /* GitHubViewerUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -77,11 +125,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					545A4AFE2D1A890800C65FC1 = {
 						CreatedOnToolsVersion = 16.1;
+					};
+					548973D52D1AB1C100674B73 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 545A4AFE2D1A890800C65FC1;
 					};
 				};
 			};
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				545A4AFE2D1A890800C65FC1 /* GitHubViewer */,
+				548973D52D1AB1C100674B73 /* GitHubViewerUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		545A4AFD2D1A890800C65FC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		548973D42D1AB1C100674B73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		548973D22D1AB1C100674B73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		548973DB2D1AB1C100674B73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 545A4AFE2D1A890800C65FC1 /* GitHubViewer */;
+			targetProxy = 548973DA2D1AB1C100674B73 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		545A4B0C2D1A890900C65FC1 /* Debug */ = {
@@ -319,6 +394,45 @@
 			};
 			name = Release;
 		};
+		548973DC2D1AB1C100674B73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algorand.GitHubViewerUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitHubViewer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GitHubViewer";
+			};
+			name = Debug;
+		};
+		548973DD2D1AB1C100674B73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.algorand.GitHubViewerUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitHubViewer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GitHubViewer";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -336,6 +450,15 @@
 			buildConfigurations = (
 				545A4B0F2D1A890900C65FC1 /* Debug */,
 				545A4B102D1A890900C65FC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		548973DE2D1AB1C100674B73 /* Build configuration list for PBXNativeTarget "GitHubViewerUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				548973DC2D1AB1C100674B73 /* Debug */,
+				548973DD2D1AB1C100674B73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
