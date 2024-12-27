@@ -8,7 +8,7 @@ import SwiftUI
 
 struct OrganizationFilterRow: View {
     
-    var id: Int
+    var id: String
     var name: String
     var reposCount: Int
     var isSelected: Bool
@@ -41,7 +41,7 @@ struct OrganizationFilterRow: View {
 struct OrganizationFilterRowPreview: PreviewProvider {
     
     static var previews: some View {
-        OrganizationFilterRow(id: 1, name: "Name", reposCount: 123, isSelected: true, onTap: {})
+        OrganizationFilterRow(id: "ID", name: "Name", reposCount: 123, isSelected: true, onTap: {})
             .previewLayout(.sizeThatFits)
     }
 }

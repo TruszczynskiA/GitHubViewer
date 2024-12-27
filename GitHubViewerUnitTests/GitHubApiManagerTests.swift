@@ -5,14 +5,13 @@
 // --------------------------------------------------
 
 import Testing
-import Combine
 import Foundation
 @testable import GitHubViewer
 
 struct GitHubApiManagerTests {
     
     @Test("Valid response for OrganizationReposRequest request")
-    func validOrganizationReposResponse() async {
+    func validOrganizationReposResponse() async throws {
         
         let rawResponse = """
         [
@@ -38,23 +37,12 @@ struct GitHubApiManagerTests {
         
         let apiCaller = GitHubApiCallerMock()
         apiCaller.response = .json(code: 200, string: rawResponse)
-        let manager = GitHubApiManager(caller: apiCaller)
         
+        let manager = GitHubApiManager(caller: apiCaller)
         let request = OrganizationReposRequest(orgName: "qwerty")
         
-        var cancellables = Set<AnyCancellable>()
-        
-        await confirmation { confirmation in
-            manager.perform(request: request)
-                .sink(
-                    receiveCompletion: { _ in },
-                    receiveValue: { response in
-                        #expect(response == expectedResponse)
-                        confirmation()
-                    }
-                )
-                .store(in: &cancellables)
-        }
+        let response = try await manager.perform(request: request)
+        #expect(response == expectedResponse)
     }
     
     @Test("Error from URLSession")
@@ -64,33 +52,21 @@ struct GitHubApiManagerTests {
         
         let apiCaller = GitHubApiCallerMock()
         apiCaller.response = .error(error: urlError)
-        let manager = GitHubApiManager(caller: apiCaller)
         
+        let manager = GitHubApiManager(caller: apiCaller)
         let request = OrganizationReposRequest(orgName: "qwerty")
         
-        var cancellables = Set<AnyCancellable>()
-        
-        await confirmation { confirmation in
-            manager.perform(request: request)
-                .sink(
-                    receiveCompletion: { completion in
-                        
-                        guard case let .failure(error) = completion else {
-                            Issue.record("Test passed without error")
-                            return
-                        }
-                        
-                        guard case let .requestError(error) = error else {
-                            Issue.record("Invalid error type")
-                            return
-                        }
-                        
-                        #expect(error == urlError)
-                        confirmation()
-                    },
-                    receiveValue: { _ in }
-                )
-                .store(in: &cancellables)
+        do {
+            _ = try await manager.perform(request: request)
+            Issue.record("Test passed without error")
+        } catch let error as GitHubApiManager.ManagerError {
+            guard case let .requestError(error) = error else {
+                Issue.record("Invalid error type")
+                return
+            }
+            #expect(error == urlError)
+        } catch {
+            Issue.record("Invalid error type")
         }
     }
 
@@ -101,32 +77,21 @@ struct GitHubApiManagerTests {
         
         let apiCaller = GitHubApiCallerMock()
         apiCaller.response = .json(code: nil, string: "")
-        let manager = GitHubApiManager(caller: apiCaller, baseURL: "Invalid URL")
         
+        let manager = GitHubApiManager(caller: apiCaller, baseURL: "Invalid URL")
         let request = OrganizationReposRequest(orgName: "")
         
-        var cancellables = Set<AnyCancellable>()
-        
-        await confirmation { confirmation in
-            manager.perform(request: request)
-                .sink(
-                    receiveCompletion: { completion in
-                        guard case let .failure(error) = completion else {
-                            Issue.record("Test passed without error")
-                            return
-                        }
-                        
-                        guard case let .internalError(error) = error else {
-                            Issue.record("Invalid error type")
-                            return
-                        }
-                        
-                        #expect(error == expectedError)
-                        confirmation()
-                    },
-                    receiveValue: { _ in }
-                )
-                .store(in: &cancellables)
+        do {
+            _ = try await manager.perform(request: request)
+            Issue.record("Test passed without error")
+        } catch let error as GitHubApiManager.ManagerError {
+            guard case let .internalError(error) = error else {
+                Issue.record("Invalid error type")
+                return
+            }
+            #expect(error == expectedError)
+        } catch {
+            Issue.record("Invalid error type")
         }
     }
     
@@ -141,28 +106,17 @@ struct GitHubApiManagerTests {
         
         let request = InvalidRequest()
         
-        var cancellables = Set<AnyCancellable>()
-        
-        await confirmation { confirmation in
-            manager.perform(request: request)
-                .sink(
-                    receiveCompletion: { completion in
-                        guard case let .failure(error) = completion else {
-                            Issue.record("Test passed without error")
-                            return
-                        }
-                        
-                        guard case let .internalError(error) = error else {
-                            Issue.record("Invalid error type")
-                            return
-                        }
-                        
-                        #expect(error == expectedError)
-                        confirmation()
-                    },
-                    receiveValue: { _ in }
-                )
-                .store(in: &cancellables)
+        do {
+            _ = try await manager.perform(request: request)
+            Issue.record("Test passed without error")
+        } catch let error as GitHubApiManager.ManagerError {
+            guard case let .internalError(error) = error else {
+                Issue.record("Invalid error type")
+                return
+            }
+            #expect(error == expectedError)
+        } catch {
+            Issue.record("Invalid error type")
         }
     }
     
@@ -194,28 +148,17 @@ struct GitHubApiManagerTests {
         
         let request = OrganizationReposRequest(orgName: "qwerty")
         
-        var cancellables = Set<AnyCancellable>()
-        
-        await confirmation { confirmation in
-            manager.perform(request: request)
-                .sink(
-                    receiveCompletion: { completion in
-                        guard case let .failure(error) = completion else {
-                            Issue.record("Test passed without error")
-                            return
-                        }
-                        
-                        guard case let .invalidResponseError(code) = error else {
-                            Issue.record("Invalid error type")
-                            return
-                        }
-                        
-                        #expect(code == expectedHttpCode)
-                        confirmation()
-                    },
-                    receiveValue: { _ in }
-                )
-                .store(in: &cancellables)
+        do {
+            _ = try await manager.perform(request: request)
+            Issue.record("Test passed without error")
+        } catch let error as GitHubApiManager.ManagerError {
+            guard case let .invalidResponseError(code) = error else {
+                Issue.record("Invalid error type")
+                return
+            }
+            #expect(code == expectedHttpCode)
+        } catch {
+            Issue.record("Invalid error type")
         }
     }
 }

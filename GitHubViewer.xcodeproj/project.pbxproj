@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		54DB13BC2D1EB7130060D51A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 54DB13BB2D1EB7130060D51A /* RealmSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		548973DA2D1AB1C100674B73 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54DB13BC2D1EB7130060D51A /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,7 @@
 			);
 			name = GitHubViewer;
 			packageProductDependencies = (
+				54DB13BB2D1EB7130060D51A /* RealmSwift */,
 			);
 			productName = GitHubViewer;
 			productReference = 545A4AFF2D1A890800C65FC1 /* GitHubViewer.app */;
@@ -146,6 +152,9 @@
 			);
 			mainGroup = 545A4AF62D1A890700C65FC1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				54DB13BA2D1EB7130060D51A /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 545A4B002D1A890800C65FC1 /* Products */;
 			projectDirPath = "";
@@ -466,6 +475,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		54DB13BA2D1EB7130060D51A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.54.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54DB13BB2D1EB7130060D51A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54DB13BA2D1EB7130060D51A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 545A4AF72D1A890700C65FC1 /* Project object */;
 }
