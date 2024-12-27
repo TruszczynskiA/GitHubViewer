@@ -12,7 +12,7 @@ struct RepoListRow: View {
     var organizationName: String
     var description: String?
     var language: String?
-    var starsCount: String
+    var starCount: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4.0) {
@@ -43,7 +43,7 @@ struct RepoListRow: View {
                         .frame(width: 13.0, height: 13.0)
                         .padding(EdgeInsets(top: 0.0, leading: 0.0, bottom: 2.0, trailing: 2.0))
                         .foregroundStyle(Color.Text.primary)
-                    Text(starsCount)
+                    Text(starCount)
                         .font(.avenir(size: 13.0))
                         .foregroundStyle(Color.Text.primary)
                         .padding(0.0)
@@ -62,7 +62,7 @@ struct RepoListRowPreviews: PreviewProvider {
             organizationName: "Organization Name",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             language: "Swift",
-            starsCount: "123"
+            starCount: "123"
         )
         .previewLayout(.sizeThatFits)
     }

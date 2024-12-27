@@ -5,7 +5,6 @@
 // --------------------------------------------------
 
 import Foundation
-import Combine
 @testable import GitHubViewer
 
 final class GitHubApiCallerMock {
@@ -20,18 +19,15 @@ final class GitHubApiCallerMock {
 
 extension GitHubApiCallerMock: GitHubApiCallable {
     
-    func perform(urlRequest: URLRequest) -> AnyPublisher<ApiResponse, URLError> {
+    func perform(urlRequest: URLRequest) async throws -> ApiResponse {
         
         guard let response else { fatalError() }
         
         switch response {
         case let .json(code, string):
-            return Just(ApiResponse(code: code, data: string.data(using: .utf8)!))
-                .setFailureType(to: URLError.self)
-                .eraseToAnyPublisher()
+            return ApiResponse(code: code, data: string.data(using: .utf8)!)
         case let .error(error):
-            return Fail<ApiResponse, URLError>(error: error)
-                .eraseToAnyPublisher()
+            throw error
         }
     }
 }

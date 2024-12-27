@@ -5,16 +5,14 @@
 // --------------------------------------------------
 
 import Foundation
-import Combine
 
 final class GitHubApiCaller {}
 
 extension GitHubApiCaller: GitHubApiCallable {
     
-    func perform(urlRequest: URLRequest) -> AnyPublisher<ApiResponse, URLError> {
-        URLSession.shared
-            .dataTaskPublisher(for: urlRequest)
-            .map { ApiResponse(code: ($1 as? HTTPURLResponse)?.statusCode, data: $0) }
-            .eraseToAnyPublisher()
+    func perform(urlRequest: URLRequest) async throws -> ApiResponse {
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        let httpResponse = response as? HTTPURLResponse
+        return ApiResponse(code: httpResponse?.statusCode, data: data)
     }
 }
