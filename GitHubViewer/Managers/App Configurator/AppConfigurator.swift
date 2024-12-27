@@ -16,6 +16,7 @@ enum AppConfigurator {
             .map {
                 let model = OrganizationModel()
                 model.login = $0
+                model.isVisible = true
                 return model
             }
         

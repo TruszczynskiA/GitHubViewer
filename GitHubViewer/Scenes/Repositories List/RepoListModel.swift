@@ -72,7 +72,7 @@ final class RepoListModel: ObservableObject {
         notificationsTokens = [repositoriesToken, organizationsToken]
     }
     
-    // MARK: - Actions
+    // MARK: - Updates
     
     func updateData() {
         
@@ -81,7 +81,8 @@ final class RepoListModel: ObservableObject {
         Task { @MainActor in
             do {
                 let organizations = realm.objects(OrganizationModel.self).map(\.login)
-                let organizationsModels = try await Array(organizations).asyncMap { try await fetchData(organization: $0) }
+                let responses = try await Array(organizations).asyncMap { try await fetchData(organization: $0) }
+                let organizationsModels = responses.map { makeOrganizationModel(organization: $0.organization, repositories: $0.repositories) }
                 try realm.write {
                     realm.delete(realm.objects(OrganizationModel.self))
                     realm.delete(realm.objects(RepositoryModel.self))
@@ -134,30 +135,10 @@ final class RepoListModel: ObservableObject {
     
     // MARK: - API Actions
     
-    private func fetchData(organization: String) async throws -> OrganizationModel {
-        
+    private func fetchData(organization: String) async throws -> (organization: OrganizationResponse, repositories: [OrganizationReposResponse]) {
         let organizationData = try await fetchOrganizationData(organization: organization)
         let repositoriesData = try await fetchRepositories(organization: organization)
-        
-        let repositories = repositoriesData.map {
-            let model = RepositoryModel()
-            model.id = $0.id
-            model.name = $0.name
-            model.note = $0.description
-            model.language = $0.language
-            model.starCount = $0.stargazersCount
-            return model
-        }
-        
-        let existingOrganization = realm.objects(OrganizationModel.self).first { $0.login == organization }
-        
-        let organization = OrganizationModel()
-        organization.login = organizationData.login
-        organization.name = organizationData.name
-        organization.isVisible = existingOrganization?.isVisible ?? true
-        organization.repositories.append(objectsIn: repositories)
-        
-        return organization
+        return (organizationData, repositoriesData)
     }
     
     private func fetchOrganizationData(organization: String) async throws -> OrganizationResponse {
@@ -168,5 +149,30 @@ final class RepoListModel: ObservableObject {
     private func fetchRepositories(organization: String) async throws -> [OrganizationReposResponse] {
         let request = OrganizationReposRequest(orgName: organization)
         return try await apiManager.perform(request: request)
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeOrganizationModel(organization: OrganizationResponse, repositories: [OrganizationReposResponse]) -> OrganizationModel {
+        
+        let repositoriesModels = repositories.map {
+            let model = RepositoryModel()
+            model.id = $0.id
+            model.name = $0.name
+            model.note = $0.description
+            model.language = $0.language
+            model.starCount = $0.stargazersCount
+            return model
+        }
+        
+        let existingOrganization = realm.objects(OrganizationModel.self).first { $0.login == organization.login }
+        
+        let organizationModel = OrganizationModel()
+        organizationModel.login = organization.login
+        organizationModel.name = organization.name
+        organizationModel.isVisible = existingOrganization?.isVisible ?? true
+        organizationModel.repositories.append(objectsIn: repositoriesModels)
+        
+        return organizationModel
     }
 }
