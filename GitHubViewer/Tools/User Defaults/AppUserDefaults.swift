@@ -1,11 +1,9 @@
 // --------------------------------------------------
-// GitHubApiCallable.swift
+// AppUserDefaults.swift
 // Copyright © 2024 Adrian Truszczyński.
 // All Rights Reserved.
 // --------------------------------------------------
 
-import Foundation
-
-protocol GitHubApiCallable: AnyObject {
-    func perform(urlRequest: URLRequest) async throws -> ApiResponse
+enum AppUserDefaults {
+    @UserDefault(key: "dataInitialised") static var dataInitialised: Bool?
 }

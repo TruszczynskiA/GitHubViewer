@@ -5,7 +5,6 @@
 // --------------------------------------------------
 
 import Foundation
-import Combine
 
 final class GitHubApiManager {
     
@@ -14,7 +13,6 @@ final class GitHubApiManager {
         case invalidResponseError(code: Int?)
         case requestError(error: URLError)
         case unknownError(error: Error)
-        case interrupted
     }
     
     enum InternalError: Error {
@@ -41,23 +39,15 @@ final class GitHubApiManager {
     
     // MARK: - Actions
     
-    func perform<Request: Requestable>(request: Request) -> AnyPublisher<Request.ResponseType, ManagerError> {
-        
-        let urlRequest: URLRequest
-        
+    func perform<Request: Requestable>(request: Request) async throws -> Request.ResponseType {
         do {
-            urlRequest = try makeUrlRequest(request: request)
+            let urlRequest = try makeUrlRequest(request: request)
+            let result = try await caller.perform(urlRequest: urlRequest)
+            let data = try handle(response: result)
+            return try jsonDecoder.decode(request.responseType, from: data)
         } catch {
-            let outputError = map(error: error)
-            return Fail(error: outputError)
-                .eraseToAnyPublisher()
+            throw map(error: error)
         }
-        
-        return caller.perform(urlRequest: urlRequest)
-            .tryCompactMap { [weak self] in try self?.handle(response: $0) }
-            .decode(type: request.responseType, decoder: jsonDecoder)
-            .mapError { [weak self] in self?.map(error: $0) ?? ManagerError.interrupted }
-            .eraseToAnyPublisher()
     }
     
     // MARK: - Helpers

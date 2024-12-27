@@ -1,11 +1,14 @@
 // --------------------------------------------------
-// GitHubApiCallable.swift
+// View+Utils.swift
 // Copyright © 2024 Adrian Truszczyński.
 // All Rights Reserved.
 // --------------------------------------------------
 
-import Foundation
+import SwiftUI
 
-protocol GitHubApiCallable: AnyObject {
-    func perform(urlRequest: URLRequest) async throws -> ApiResponse
+extension View {
+    
+    func toast(message: Binding<String?>) -> some View {
+        modifier(ToastViewModifier(message: message))
+    }
 }

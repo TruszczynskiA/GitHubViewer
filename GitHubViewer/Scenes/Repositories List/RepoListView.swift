@@ -10,7 +10,6 @@ struct RepoListView: View {
     
     @StateObject var model = RepoListModel()
     
-    @State var searchText: String = ""
     @State private var isFilterSheetPresented = false
     
     var body: some View {
@@ -31,7 +30,7 @@ struct RepoListView: View {
                             .font(.avenir(size: 18.0))
                             .foregroundStyle(Color.Text.primary)
                         Button(
-                            action: onRefreshButtonAction,
+                            action: onRefreshAction,
                             label: {
                                 Text("list.placeholder.refresh")
                                     .font(.avenir(size: 16.0))
@@ -47,13 +46,14 @@ struct RepoListView: View {
                                         organizationName: $0.organizationName,
                                         description: $0.description,
                                         language: $0.language,
-                                        starsCount: $0.starsCount
+                                        starCount: $0.starCount
                                     )
                                     Divider()
                                 }
                             }
                         }
                         .refreshable {
+                            onRefreshAction()
                         }
                     }
                 }
@@ -61,14 +61,18 @@ struct RepoListView: View {
             .background(Color.Background.main)
             .navigationTitle("list.navigation.title")
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $searchText, placement: .automatic, prompt: Text("list.search.placeholder"))
+            .searchable(text: $model.searchText, placement: .automatic, prompt: Text("list.search.placeholder"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: onRefreshButtonAction, label: { Image(systemName: "arrow.clockwise") })
+                    Button(action: onRefreshAction, label: { Image(systemName: "arrow.clockwise") })
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: onFilterButtonAction, label: { Image(systemName: "line.3.horizontal.decrease") })
                 }
+            }
+            .toast(message: $model.errorMessage)
+            .onAppear() {
+                onRefreshAction()
             }
         }
         .sheet(isPresented: $isFilterSheetPresented) {
@@ -78,7 +82,8 @@ struct RepoListView: View {
     
     // MARK: - Actions
     
-    private func onRefreshButtonAction() {
+    private func onRefreshAction() {
+        model.updateData()
     }
     
     private func onFilterButtonAction() {

@@ -12,6 +12,9 @@ struct GitHubViewerApp: App {
     var body: some Scene {
         WindowGroup {
             RepoListView()
+                .onAppear() {
+                    AppConfigurator.configure()
+                }
         }
     }
 }
