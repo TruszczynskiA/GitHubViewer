@@ -8,11 +8,15 @@ import SwiftUI
 
 struct OrganizationFilterRow: View {
     
+    // MARK: - Properties
+    
     var id: String
     var name: String
     var reposCount: Int
     var isSelected: Bool
     var onTap: (() -> Void)
+    
+    // MARK: - View
     
     var body: some View {
         HStack {
