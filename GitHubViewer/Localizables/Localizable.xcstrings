@@ -96,7 +96,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visible Organizations"
+            "value" : "Options"
           }
         }
       }
@@ -119,6 +119,56 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "filters.text.sorting.language" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
+    },
+    "filters.text.sorting.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "filters.text.sorting.stars" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stars"
+          }
+        }
+      }
+    },
+    "filters.text.title.sortBy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort By"
+          }
+        }
+      }
+    },
+    "filters.text.title.visibleOrganizations" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visible Organizations"
           }
         }
       }

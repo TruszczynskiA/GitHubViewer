@@ -34,7 +34,8 @@ struct OrganizationFilterRow: View {
                     .foregroundStyle(Color.Text.primary)
             }
         }
-        .padding()
+        .padding(.vertical, 5.0)
+        .padding(.horizontal, 12.0)
         .contentShape(Rectangle())
         .onTapGesture {
             onTap()
