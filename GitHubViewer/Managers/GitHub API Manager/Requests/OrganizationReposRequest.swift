@@ -20,4 +20,12 @@ struct OrganizationReposResponse: Decodable, Equatable {
     let description: String?
     let stargazersCount: Int
     let language: String?
+    let htmlUrl: String
+    let createdAt: String
+    let updatedAt: String
+    let pushedAt: String
+    let homepage: String?
+    let size: Int
+    let forks: Int
+    let openIssues: Int
 }

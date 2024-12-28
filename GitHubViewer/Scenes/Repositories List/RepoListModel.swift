@@ -34,6 +34,7 @@ final class RepoListModel: ObservableObject {
     
     private let apiManager = GitHubApiManager()
     private let realm = try! Realm()
+    private let dateFormatter = DateFormatter.iso8601
     
     private var repositories: [RepositoryViewModel] = []
     private var notificationsTokens: [NotificationToken] = []
@@ -162,6 +163,14 @@ final class RepoListModel: ObservableObject {
             model.note = $0.description
             model.language = $0.language
             model.starCount = $0.stargazersCount
+            model.url = $0.htmlUrl
+            model.homepage = $0.homepage
+            model.createdAt = dateFormatter.date(from: $0.createdAt)
+            model.updatedAt = dateFormatter.date(from: $0.updatedAt)
+            model.pushedAt = dateFormatter.date(from: $0.pushedAt)
+            model.size = $0.size
+            model.forksCount = $0.forks
+            model.openIssuesCount = $0.openIssues
             return model
         }
         

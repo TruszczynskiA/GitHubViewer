@@ -8,11 +8,16 @@ import SwiftUI
 
 struct RepoListRow: View {
     
+    // MARK: - Properties
+    
     var name: String
     var organizationName: String
     var description: String?
     var language: String?
     var starCount: String
+    var onTap: (() -> Void)
+    
+    // MARK: - View
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4.0) {
@@ -29,12 +34,7 @@ struct RepoListRow: View {
             }
             HStack(alignment: .bottom) {
                 if let language {
-                    Text(language)
-                        .font(.avenir(size: 13.0))
-                        .foregroundStyle(.black)
-                        .padding(EdgeInsets(top: 5.0, leading: 8.0, bottom: 5.0, trailing: 8.0))
-                        .background(Color.Background.language)
-                        .cornerRadius(8.0)
+                    TextPill(text: language)
                 }
                 Spacer()
                 HStack(spacing: 0.0) {
@@ -51,6 +51,10 @@ struct RepoListRow: View {
             }
         }
         .padding(EdgeInsets(top: 8.0, leading: 12.0, bottom: 8.0, trailing: 12.0))
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTap()
+        }
     }
 }
 
@@ -62,7 +66,8 @@ struct RepoListRowPreviews: PreviewProvider {
             organizationName: "Organization Name",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             language: "Swift",
-            starCount: "123"
+            starCount: "123",
+            onTap: {}
         )
         .previewLayout(.sizeThatFits)
     }
