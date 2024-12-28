@@ -32,7 +32,7 @@ final class RepoListModel: ObservableObject {
     
     // MARK: - Properties
     
-    private let apiManager = GitHubApiManager()
+    private let apiManager: GitHubApiManagable
     private let realm = try! Realm()
     private let dateFormatter = DateFormatter.iso8601
     
@@ -45,7 +45,8 @@ final class RepoListModel: ObservableObject {
     
     // MARK: - Initialisers
     
-    init() {
+    init(apiManager: GitHubApiManagable) {
+        self.apiManager = apiManager
         setupCallbacks()
     }
     

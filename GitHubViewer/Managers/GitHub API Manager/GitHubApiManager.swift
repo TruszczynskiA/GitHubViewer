@@ -37,19 +37,6 @@ final class GitHubApiManager {
         self.baseURL = baseURL
     }
     
-    // MARK: - Actions
-    
-    func perform<Request: Requestable>(request: Request) async throws -> Request.ResponseType {
-        do {
-            let urlRequest = try makeUrlRequest(request: request)
-            let result = try await caller.perform(urlRequest: urlRequest)
-            let data = try handle(response: result)
-            return try jsonDecoder.decode(request.responseType, from: data)
-        } catch {
-            throw map(error: error)
-        }
-    }
-    
     // MARK: - Helpers
     
     private func makeUrlRequest(request: any Requestable) throws -> URLRequest {
@@ -81,5 +68,19 @@ final class GitHubApiManager {
     private func handle(response: ApiResponse) throws -> Data {
         guard response.code == 200 else { throw ManagerError.invalidResponseError(code: response.code) }
         return response.data
+    }
+}
+
+extension GitHubApiManager: GitHubApiManagable {
+    
+    func perform<Request: Requestable>(request: Request) async throws -> Request.ResponseType {
+        do {
+            let urlRequest = try makeUrlRequest(request: request)
+            let result = try await caller.perform(urlRequest: urlRequest)
+            let data = try handle(response: result)
+            return try jsonDecoder.decode(request.responseType, from: data)
+        } catch {
+            throw map(error: error)
+        }
     }
 }
