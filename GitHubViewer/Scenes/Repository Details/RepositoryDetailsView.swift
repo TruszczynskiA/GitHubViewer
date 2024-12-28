@@ -24,8 +24,11 @@ struct RepositoryDetailsView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20.0) {
-                Divider()
-                    .background(.ultraThinMaterial)
+                VStack(spacing: 0.0) {
+                    NavigationTintView(color: Color.Misc.navigationBar)
+                    Divider()
+                        .background(.ultraThinMaterial)
+                }
                 if let repository = model.repository {
                     if let description = repository.description {
                         Text(description)

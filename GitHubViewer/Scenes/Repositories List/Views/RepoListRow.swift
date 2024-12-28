@@ -42,12 +42,11 @@ struct RepoListRow: View {
                         .resizable()
                         .frame(width: 13.0, height: 13.0)
                         .padding(EdgeInsets(top: 0.0, leading: 0.0, bottom: 2.0, trailing: 2.0))
-                        .foregroundStyle(Color.Text.primary)
                     Text(starCount)
                         .font(.avenir(size: 13.0))
-                        .foregroundStyle(Color.Text.primary)
                         .padding(0.0)
                 }
+                .foregroundStyle(Color.Text.secondary)
             }
         }
         .padding(EdgeInsets(top: 8.0, leading: 12.0, bottom: 8.0, trailing: 12.0))
