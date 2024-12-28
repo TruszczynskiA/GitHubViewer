@@ -24,7 +24,7 @@ struct RepoListView: View {
     
     // MARK: - Properties
     
-    @StateObject var model = RepoListModel()
+    @StateObject var model = RepoListModel(apiManager: GitHubApiManager())
     @State private var activeSheet: Sheet?
     
     // MARK: - View
