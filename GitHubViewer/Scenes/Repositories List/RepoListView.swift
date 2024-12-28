@@ -8,16 +8,35 @@ import SwiftUI
 
 struct RepoListView: View {
     
-    @StateObject var model = RepoListModel()
+    enum Sheet: Identifiable {
+        case filters
+        case repositoryDetails(repositoryID: Int)
+        
+        var id: Int {
+            switch self {
+            case .filters:
+                return 0
+            case .repositoryDetails:
+                return 1
+            }
+        }
+    }
     
-    @State private var isFilterSheetPresented = false
+    // MARK: - Properties
+    
+    @StateObject var model = RepoListModel(apiManager: GitHubApiManager())
+    @State private var activeSheet: Sheet?
+    
+    // MARK: - View
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0.0) {
+                SearchBar(searchText: $model.searchText)
+                    .padding()
+                    .background(Color.Misc.navigationBar)
                 Divider()
                     .background(.ultraThinMaterial)
-                
                 switch model.state {
                 case .loading:
                     Spacer()
@@ -40,13 +59,14 @@ struct RepoListView: View {
                     } else {
                         ScrollView() {
                             VStack(spacing: 0.0) {
-                                ForEach(repositories) {
+                                ForEach(repositories) { repository in
                                     RepoListRow(
-                                        name: $0.name,
-                                        organizationName: $0.organizationName,
-                                        description: $0.description,
-                                        language: $0.language,
-                                        starCount: $0.starCount
+                                        name: repository.name,
+                                        organizationName: repository.organizationName,
+                                        description: repository.description,
+                                        language: repository.language,
+                                        starCount: repository.starCount,
+                                        onTap: { showRepositoryDetailsView(repositoryID: repository.id) }
                                     )
                                     Divider()
                                 }
@@ -61,13 +81,12 @@ struct RepoListView: View {
             .background(Color.Background.main)
             .navigationTitle("list.navigation.title")
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $model.searchText, placement: .automatic, prompt: Text("list.search.placeholder"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: onRefreshAction, label: { Image(systemName: "arrow.clockwise") })
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: onFilterButtonAction, label: { Image(systemName: "line.3.horizontal.decrease") })
+                    Button(action: showFiltersView, label: { Image(systemName: "line.3.horizontal.decrease") })
                 }
             }
             .toast(message: $model.errorMessage)
@@ -75,8 +94,13 @@ struct RepoListView: View {
                 onRefreshAction()
             }
         }
-        .sheet(isPresented: $isFilterSheetPresented) {
-            FiltersView()
+        .sheet(item: $activeSheet) {
+            switch $0 {
+            case .filters:
+                SettingsView() { model.onSortMethodChange() }
+            case let .repositoryDetails(id):
+                RepositoryDetailsView(repositoryID: id)
+            }
         }
     }
     
@@ -86,8 +110,12 @@ struct RepoListView: View {
         model.updateData()
     }
     
-    private func onFilterButtonAction() {
-        isFilterSheetPresented.toggle()
+    private func showFiltersView() {
+        activeSheet = .filters
+    }
+    
+    private func showRepositoryDetailsView(repositoryID: Int) {
+        activeSheet = .repositoryDetails(repositoryID: repositoryID)
     }
 }
 

@@ -96,7 +96,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visible Organizations"
+            "value" : "Options"
           }
         }
       }
@@ -119,6 +119,56 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "filters.text.sorting.language" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
+    },
+    "filters.text.sorting.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        }
+      }
+    },
+    "filters.text.sorting.stars" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stars"
+          }
+        }
+      }
+    },
+    "filters.text.title.sortBy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sort By"
+          }
+        }
+      }
+    },
+    "filters.text.title.visibleOrganizations" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visible Organizations"
           }
         }
       }
@@ -159,6 +209,106 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        }
+      }
+    },
+    "repositoryDetails.button.githubPage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub Page"
+          }
+        }
+      }
+    },
+    "repositoryDetails.button.homepage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Homepage"
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.createdAt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Created At:"
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.forks" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forks"
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.issues" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Issues"
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unfortunately, the repository could not be loaded. Please try again later. If the issue persists, feel free to contact customer support for further assistance."
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.pushedAt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Push:"
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.stars" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stars"
+          }
+        }
+      }
+    },
+    "repositoryDetails.text.updatedAt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Update:"
+          }
+        }
+      }
+    },
+    "repositoryDetails.title.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
           }
         }
       }

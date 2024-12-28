@@ -32,8 +32,9 @@ final class RepoListModel: ObservableObject {
     
     // MARK: - Properties
     
-    private let apiManager = GitHubApiManager()
+    private let apiManager: GitHubApiManagable
     private let realm = try! Realm()
+    private let dateFormatter = DateFormatter.iso8601
     
     private var repositories: [RepositoryViewModel] = []
     private var notificationsTokens: [NotificationToken] = []
@@ -44,7 +45,8 @@ final class RepoListModel: ObservableObject {
     
     // MARK: - Initialisers
     
-    init() {
+    init(apiManager: GitHubApiManagable) {
+        self.apiManager = apiManager
         setupCallbacks()
     }
     
@@ -70,6 +72,12 @@ final class RepoListModel: ObservableObject {
             }
         
         notificationsTokens = [repositoriesToken, organizationsToken]
+    }
+    
+    // MARK: - Actions
+    
+    func onSortMethodChange() {
+        updatePresentedData(searchText: searchText)
     }
     
     // MARK: - Updates
@@ -101,6 +109,7 @@ final class RepoListModel: ObservableObject {
     private func updatePresentedData(searchText: String) {
         
         let repositoriesModels: Results<RepositoryModel>
+        let sortingMethod = AppUserDefaults.sortMethod ?? .name
         
         if searchText.isEmpty {
             repositoriesModels = self.repositoriesModels
@@ -112,7 +121,7 @@ final class RepoListModel: ObservableObject {
         
         let viewModels = repositoriesModels
             .where { $0.organization.isVisible == true }
-            .sorted(byKeyPath: "name")
+            .sorted(byKeyPath: sortingMethod.sortKey, ascending: sortingMethod.isSortAscending)
             .map {
                 RepositoryViewModel(
                     id: $0.id,
@@ -162,6 +171,14 @@ final class RepoListModel: ObservableObject {
             model.note = $0.description
             model.language = $0.language
             model.starCount = $0.stargazersCount
+            model.url = $0.htmlUrl
+            model.homepage = $0.homepage
+            model.createdAt = dateFormatter.date(from: $0.createdAt)
+            model.updatedAt = dateFormatter.date(from: $0.updatedAt)
+            model.pushedAt = dateFormatter.date(from: $0.pushedAt)
+            model.size = $0.size
+            model.forksCount = $0.forks
+            model.openIssuesCount = $0.openIssues
             return model
         }
         

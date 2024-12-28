@@ -6,4 +6,5 @@
 
 enum AppUserDefaults {
     @UserDefault(key: "dataInitialised") static var dataInitialised: Bool?
+    @UserDefault(key: "sortMethod") static var sortMethod: SortMethod?
 }

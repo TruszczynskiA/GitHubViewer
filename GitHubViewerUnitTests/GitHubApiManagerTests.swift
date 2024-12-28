@@ -18,21 +18,64 @@ struct GitHubApiManagerTests {
             {
                 "id": 1,
                 "name": "Foo",
-                "stargazers_count": 123
+                "stargazers_count": 123,
+                "html_url": "www.apple.com",
+                "created_at": "2000-02-22T22:22:22Z",
+                "updated_at": "2001-01-11T11:11:11Z",
+                "pushed_at": "2003-03-30T13:13:13Z",
+                "size": 12345,
+                "forks": 12,
+                "open_issues": 23
             },
             {
                 "id": 2,
                 "name": "Bar",
                 "description": "I'm Bar",
                 "stargazers_count": 321,
-                "language": "Swift"
+                "language": "Swift",
+                "html_url": "www.google.com",
+                "created_at": "2001-02-22T22:22:22Z",
+                "updated_at": "2002-01-11T11:11:11Z",
+                "pushed_at": "2004-03-30T13:13:13Z",
+                "homepage": "www.amazon.com",
+                "size": 54321,
+                "forks": 54,
+                "open_issues": 43
             }
         ]
         """
         
         let expectedResponse = [
-            OrganizationReposResponse(id: 1, name: "Foo", description: nil, stargazersCount: 123, language: nil),
-            OrganizationReposResponse(id: 2, name: "Bar", description: "I'm Bar", stargazersCount: 321, language: "Swift")
+            OrganizationReposResponse(
+                id: 1,
+                name: "Foo",
+                description: nil,
+                stargazersCount: 123,
+                language: nil,
+                htmlUrl: "www.apple.com",
+                createdAt: "2000-02-22T22:22:22Z",
+                updatedAt: "2001-01-11T11:11:11Z",
+                pushedAt: "2003-03-30T13:13:13Z",
+                homepage: nil,
+                size: 12345,
+                forks: 12,
+                openIssues: 23
+            ),
+            OrganizationReposResponse(
+                id: 2,
+                name: "Bar",
+                description: "I'm Bar",
+                stargazersCount: 321,
+                language: "Swift",
+                htmlUrl: "www.google.com",
+                createdAt: "2001-02-22T22:22:22Z",
+                updatedAt: "2002-01-11T11:11:11Z",
+                pushedAt: "2004-03-30T13:13:13Z",
+                homepage: "www.amazon.com",
+                size: 54321,
+                forks: 54,
+                openIssues: 43
+            )
         ]
         
         let apiCaller = GitHubApiCallerMock()
