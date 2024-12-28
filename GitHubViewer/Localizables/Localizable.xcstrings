@@ -1,0 +1,168 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "common.unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        }
+      }
+    },
+    "error.default" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred. Please try again later. If the issue persists, contact support."
+          }
+        }
+      }
+    },
+    "error.github.httpCode.403" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "403 Forbidden: You do not have permission to access this resource."
+          }
+        }
+      }
+    },
+    "error.github.httpCode.404" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "404 Not Found: The data you are looking for could not be found. "
+          }
+        }
+      }
+    },
+    "error.github.httpCode.default" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unexpected HTTP Code. Please try again later. If the issue persists, contact support."
+          }
+        }
+      }
+    },
+    "error.github.internal.invalidBaseUrl" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid Base URL: This is an internal error. Please contact our support team for assistance."
+          }
+        }
+      }
+    },
+    "error.github.internal.invalidPath" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid request path: This is an internal error. Please contact our support team for assistance."
+          }
+        }
+      }
+    },
+    "error.github.request" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred while processing your request. Please try again later. If the issue persists, contact support for assistance."
+          }
+        }
+      }
+    },
+    "error.github.unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown error occurred. Please try again later. If the problem persists, contact support for assistance."
+          }
+        }
+      }
+    },
+    "filters.navigation.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visible Organizations"
+          }
+        }
+      }
+    },
+    "filters.orgs.repos.%lld" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld repository"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld repositories"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "list.navigation.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repositories"
+          }
+        }
+      }
+    },
+    "list.placeholder.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No repositories were found."
+          }
+        }
+      }
+    },
+    "list.placeholder.refresh" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
+          }
+        }
+      }
+    },
+    "list.search.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
