@@ -96,7 +96,7 @@ struct RepoListView: View {
         .sheet(item: $activeSheet) {
             switch $0 {
             case .filters:
-                FiltersView()
+                SettingsView() { model.onSortMethodChange() }
             case let .repositoryDetails(id):
                 RepositoryDetailsView(repositoryID: id)
             }

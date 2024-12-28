@@ -73,6 +73,12 @@ final class RepoListModel: ObservableObject {
         notificationsTokens = [repositoriesToken, organizationsToken]
     }
     
+    // MARK: - Actions
+    
+    func onSortMethodChange() {
+        updatePresentedData(searchText: searchText)
+    }
+    
     // MARK: - Updates
     
     func updateData() {
@@ -102,6 +108,7 @@ final class RepoListModel: ObservableObject {
     private func updatePresentedData(searchText: String) {
         
         let repositoriesModels: Results<RepositoryModel>
+        let sortingMethod = AppUserDefaults.sortMethod ?? .name
         
         if searchText.isEmpty {
             repositoriesModels = self.repositoriesModels
@@ -113,7 +120,7 @@ final class RepoListModel: ObservableObject {
         
         let viewModels = repositoriesModels
             .where { $0.organization.isVisible == true }
-            .sorted(byKeyPath: "name")
+            .sorted(byKeyPath: sortingMethod.sortKey, ascending: sortingMethod.isSortAscending)
             .map {
                 RepositoryViewModel(
                     id: $0.id,

@@ -75,7 +75,6 @@ final class RepositoryDetailsModel: ObservableObject {
             homepage = URL(string: rawHomepage)
         }
         
-        
         return RepositoryViewModel(
             name: repositoryModel.name,
             description: repositoryModel.note,
