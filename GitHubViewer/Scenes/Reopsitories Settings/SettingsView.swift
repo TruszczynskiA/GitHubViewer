@@ -16,7 +16,8 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0.0) {
+                NavigationTintView(color: Color.Misc.navigationBar)
                 Divider()
                     .background(.ultraThinMaterial)
                 ScrollView {

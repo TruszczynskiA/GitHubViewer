@@ -32,9 +32,11 @@ struct RepoListView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0.0) {
+                SearchBar(searchText: $model.searchText)
+                    .padding()
+                    .background(Color.Misc.navigationBar)
                 Divider()
                     .background(.ultraThinMaterial)
-                
                 switch model.state {
                 case .loading:
                     Spacer()
@@ -79,7 +81,6 @@ struct RepoListView: View {
             .background(Color.Background.main)
             .navigationTitle("list.navigation.title")
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $model.searchText, placement: .automatic, prompt: Text("list.search.placeholder"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: onRefreshAction, label: { Image(systemName: "arrow.clockwise") })
